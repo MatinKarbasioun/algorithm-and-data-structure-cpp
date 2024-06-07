@@ -33,3 +33,6 @@
 
 #Folders
 /.vscode
+/CMakeLists.txt
+/.vscode/
+/cmake-build-debug/

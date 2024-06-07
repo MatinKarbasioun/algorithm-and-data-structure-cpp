@@ -7,7 +7,7 @@
 
 
 template <class T> 
-class Fibonacci
+class FibonacciNaive
 {
     private:
         T* First;
@@ -15,24 +15,47 @@ class Fibonacci
         T* FirstNewNum;
         T* SecondNewNum;
         int counter;
+        T generate();
     
     public:
-        Fibonacci();
-        T fibo_num();
-        ~Fibonacci();
+        FibonacciNaive();
+        T generate(int num);
+        ~FibonacciNaive();
 };
 
-template <class T>  
-Fibonacci<T>::Fibonacci(){
+template <class T>
+FibonacciNaive<T>::FibonacciNaive(){
     First = new T("0");
     Second = new T("1");
-    FirstNewNum = First;
-    SecondNewNum = Second;
     counter = 0;
 }
 
+template<class T>
+T FibonacciNaive<T>::generate(int num) {
+    FirstNewNum = First;
+    SecondNewNum = Second;
+
+    T* fibonacci_num = new T("0");
+
+    if (num == 0){
+        fibonacci_num = First;
+    }
+    else if(num == 1){
+        fibonacci_num = Second;
+    }
+    else{
+        int i = 2;
+        while (i <= num){
+            *fibonacci_num = generate();
+            i++;
+        }
+    }
+
+    return *fibonacci_num;
+}
+
 template <class T>  
-T Fibonacci<T>::fibo_num(){
+T FibonacciNaive<T>::generate(){
     counter ++;
     T tempNum = *SecondNewNum;
     *SecondNewNum = *SecondNewNum + *FirstNewNum;
@@ -42,7 +65,7 @@ T Fibonacci<T>::fibo_num(){
 }
 
 template <class T>
-Fibonacci<T>::~Fibonacci(){
+FibonacciNaive<T>::~FibonacciNaive(){
     delete First;
     delete Second;
 }

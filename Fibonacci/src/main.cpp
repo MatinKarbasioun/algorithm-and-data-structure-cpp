@@ -1,6 +1,7 @@
-#include "Domain/Fibonacci.h"
-#include "Helper/elapse.h"
-#include "Decimal/decimal.h"
+#include "Domain/FibonacciNaive.h"
+#include "../Decimal/decimal.h"
+#include "../Helper/elapse.h"
+
 
 int input(){
     int seriesNum;
@@ -10,11 +11,9 @@ int input(){
 }
 
 void func(){
-    Fibonacci<Decimal> fibo;
+    FibonacciNaive<Decimal> fibonacci;
     int seriesNum = input();
-    for (int i = 0; i < seriesNum; ++i) {
-        fibo.fibo_num();
-    }
+    fibonacci.generate(seriesNum);
 }
 
 int main(){
