@@ -33,6 +33,11 @@
 
 #Folders
 /.vscode
+<<<<<<<< HEAD:cpp/divideAndConquer/Fibonacci/.gitignore
+/build
+/CMakePresets.json
+========
 /CMakeLists.txt
 /.vscode/
 /cmake-build-debug/
+>>>>>>>> 9684013c4c1cab6f1a602552c0e9cb54ed04b231:.gitignore
