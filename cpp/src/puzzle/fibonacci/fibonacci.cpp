@@ -1,6 +1,6 @@
-#include "Domain/FibonacciNaive.h"
-#include "../Decimal/decimal.h"
-#include "../Helper/elapse.h"
+#include "fibonacci_naive.h"
+#include <decimal.h>
+#include <elapse.h>
 
 
 int input(){
@@ -16,7 +16,7 @@ void func(){
     fibonacci.generate(seriesNum);
 }
 
-int main(){
+int fibonacci_main(){
     elapse_time(func);
     return 0;
 }

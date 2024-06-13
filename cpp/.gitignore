@@ -41,3 +41,4 @@
 /.vscode/
 /cmake-build-debug/
 >>>>>>>> 9684013c4c1cab6f1a602552c0e9cb54ed04b231:.gitignore
+/out
