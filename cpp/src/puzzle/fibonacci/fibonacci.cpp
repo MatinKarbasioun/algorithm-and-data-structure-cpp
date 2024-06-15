@@ -1,6 +1,6 @@
-#include "fibonacci_naive.h"
-#include <decimal.h>
-#include <elapse.h>
+#include "puzzle/fibonacci/fibonacci_naive.h"
+#include "common/decimal/decimal.h"
+#include "common/helper/elapse.h"
 
 
 int input(){
