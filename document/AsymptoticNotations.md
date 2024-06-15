@@ -126,10 +126,3 @@ return F[n]
 
 ### Order of Growth:
 `logx(n) < n^(0.1) < n^(0.5) < n < n logx(n) < n^(1.1) < n^2 < n^3 < 1.1^n < 2^n`
-
-## Conclusion:
-Understanding the asymptotic behavior of algorithms helps in predicting their performance for large inputs and comparing different algorithms effectively.
-
----
-
-This README.md file provides an overview of measuring code speed using the Fibonacci sequence algorithm, along with an explanation of Big-O notation and its advantages and disadvantages.
