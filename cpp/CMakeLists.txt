@@ -5,9 +5,6 @@ project(Algorithm)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add included directories
-include_directories(include)
-
 
 # Source files
 set(SOURCES
@@ -21,3 +18,15 @@ set(SOURCES
 # Executable
 add_executable(Algorithm ${SOURCES})
 
+
+# Add included directories
+target_include_directories(${PROJECT_NAME} PUBLIC
+${PROJECT_SOURCE_DIR}/include)
+
+
+# Optional: Add any necessary libraries to link against
+# target_link_libraries(${PROJECT_NAME} <library_name>)
+
+# Optional: Add definitions or compile options
+# target_compile_definitions(${PROJECT_NAME} PRIVATE <definitions>)
+# target_compile_options(${PROJECT_NAME} PRIVATE <options>)

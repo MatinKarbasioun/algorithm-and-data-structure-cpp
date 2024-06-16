@@ -1,10 +1,7 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include "fibonacci/fibonacci.cpp"
+#include "puzzle/puzzle.h"
 
 
-auto puzzleProjects(){
+void puzzleProjects(){
         auto puzzles = std::vector<std::string>{"Fibonacci", "GCC"};
         auto i = 0;
         int choice = 0;

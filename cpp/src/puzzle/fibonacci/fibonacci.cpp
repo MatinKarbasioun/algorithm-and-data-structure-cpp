@@ -1,6 +1,8 @@
 #include "puzzle/fibonacci/fibonacci_naive.h"
+#include "puzzle/fibonacci/fibonacci.h"
 #include "common/decimal/decimal.h"
 #include "common/helper/elapse.h"
+using namespace alg_time;
 
 
 int input(){
@@ -10,13 +12,13 @@ int input(){
     return seriesNum;
 }
 
-void func(){
+void fibbo_func(){
     FibonacciNaive<Decimal> fibonacci;
     int seriesNum = input();
     fibonacci.generate(seriesNum);
 }
 
 int fibonacci_main(){
-    elapse_time(func);
+    alg_time::elapse_time(fibbo_func);
     return 0;
 }
