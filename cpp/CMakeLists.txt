@@ -13,6 +13,8 @@ set(SOURCES
         src/puzzle/fibonacci/fibonacci.cpp
         src/common/decimal/decimal.cpp
         src/common/helper/elapse.cpp
+        src/sorting/quick_sort.cpp
+        src/sorting/sorting.cpp
 )
 
 # Executable
@@ -20,8 +22,7 @@ add_executable(Algorithm ${SOURCES})
 
 
 # Add included directories
-target_include_directories(${PROJECT_NAME} PUBLIC
-${PROJECT_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 
 # Optional: Add any necessary libraries to link against
