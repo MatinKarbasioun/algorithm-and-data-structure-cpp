@@ -16,6 +16,8 @@ set(SOURCES
         src/sorting/quick_sort.cpp
         src/sorting/sorting.cpp
         src/data_structure/stack/find_matched_brakcets.cpp
+        src/data_structure/tree/binary/binary_tree.cpp
+        src/data_structure/tree/binary/binary_tree.h
 )
 
 # Executable
