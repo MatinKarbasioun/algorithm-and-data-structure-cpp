@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .node import Node
-from ..exception.exceptions import ListEmptyException
+from ..exception.exceptions import ListEmptyException, NodeDoesNotExist, KeyDoesNotExist
 
 """
 Lined list real uses:
@@ -18,9 +18,9 @@ Lined list real uses:
 """
 
 @dataclass
-class DoublyLinkedList:
-    head: Node
-    tail: Node
+class SinglyLinkedList:
+    head: Node | None = None
+    tail: Node | None = None
 
     def push_front(self, key: Any):
         new_node = Node(key)
@@ -31,59 +31,9 @@ class DoublyLinkedList:
             self.tail = self.head
 
     def push_back(self, key: Any):
-        pass
-
-    def top_front(self):
-        pass
-
-    def top_back(self):
-        pass
-
-    def pop_front(self):
-        node = self.head
-        self.head = node.next_pointer
-        del node
-
-    def pop_back(self, key: Any):
-        pass
-
-    def add_before(self, node: Node, key: Any):
-        pass
-
-    def add_after(self, node: Node, key: Any):
-        pass
-
-    def erase(self, key: Any):
-        pass
-
-    def empty(self) -> bool:
-        pass
-
-    def find(self):
-        pass
-
-
-@dataclass
-class SinglyLinkedList:
-    head: Node | None = None
-    tail: Node | None = None
-
-    def push_front(self, key: Any):
         new_node = Node(key)
 
         if self.head:
-            new_node.next = self.head
-            self.head = new_node
-
-        else:
-            self.head = new_node
-            self.tail = new_node
-
-    def push_back(self, key: Any):
-        new_node = Node(key)
-
-        if self.tail:
-            self.tail.next = new_node
             self.tail = new_node
 
         else:
@@ -91,58 +41,90 @@ class SinglyLinkedList:
             self.tail = new_node
 
     def top_front(self) -> Any:
-        if self.head:
+        if self.__not_empty():
             return self.head.key
 
-        else:
-            raise ListEmptyException()
-
     def top_back(self) -> Any:
-        if self.tail:
+        if self.__not_empty():
             return self.tail.key
 
-        else:
-            raise ListEmptyException()
-
     def pop_front(self):
-        if self.head:
-            if self.head != self.tail:
-                next_pointer = self.head.next_pointer
-                self.head = next_pointer
+        if self.__not_empty():
+            self.head = self.head.next_pointer
 
-            else:
-                self.head = self.head.next_pointer
-                self.tail = self.head.next_pointer
+            if not self.head:
+                self.tail = None
+
+    def pop_back(self):
+        if self.__not_empty():
+           if self.head == self.tail:
+               self.head = None
+               self.tail = None
+
+           else:
+               current_node = self.head
+
+               while current_node.next_pointer.next_pointer:
+                  current_node = current_node.next_pointer
+
+               current_node.next_pointer = None
+               self.tail.next_pointer = current_node
+
+    def add_before(self, node: Node, key: Any):
+        current_node = self.head
+
+        if self.head == node:
+           new_node = Node(key)
+           new_node.next_pointer = self.head
+           self.head = new_node
 
         else:
-            raise ListEmptyException()
+           new_node = Node(key)
 
-    def pop_back(self, key: Any):
-        if not self.head:
-            raise ListEmptyException()
+           while True:
+               if current_node.next_pointer == node:
+                   break
 
-        if self.head == self.tail:
-            self.head = None
-            self.tail = None
+               elif current_node.next_pointer is None:
+                   raise NodeDoesNotExist()
 
-        else:
+               else:
+                   current_node = current_node.next_pointer
+
+           new_node.next_pointer = current_node.next_pointer
+           current_node.next_pointer = new_node
+
+    @classmethod
+    def add_after(cls, node: Node, key: Any):
+        new_node = Node(key)
+        new_node.next_pointer = node.next_pointer
+        node.next_pointer = new_node
+
+    def erase(self, key: Any):
+        if self.__not_empty():
             current_node = self.head
 
-            while current_node.next_pointer != self.tail:
-                current_node.next_pointer =
+            if current_node.key == key:
+                self.head = self.head.next_pointer
 
+                if not self.head:
+                    self.tail = None
+
+            while True:
+                if current_node.next_pointer.key == key:
+                    break
+
+                elif current_node.next_pointer is None:
+                    raise KeyDoesNotExist()
 
                 else:
                     current_node = current_node.next_pointer
 
-    def add_before(self, node: Node, key: Any):
-        pass
+            current_node.next_pointer = current_node.next_pointer.next_pointer.next_pointer
 
-    def add_after(self, node: Node, key: Any):
-        pass
-
-    def erase(self, key: Any):
-        pass
+    def clear(self):
+        self.head = None
+        self.tail = None
 
     def empty(self) -> bool:
         if self.head:
@@ -151,9 +133,13 @@ class SinglyLinkedList:
         else:
             return False
 
-    def find(self, key: Any) -> Node:
-        if self.head:
+    def find(self, key: Any) -> bool:
+        if self.__not_empty():
             return self.head.find(key)
+
+    def __not_empty(self):
+        if self.head:
+            return True
 
         else:
             raise ListEmptyException()
