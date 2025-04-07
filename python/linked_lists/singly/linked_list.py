@@ -24,7 +24,7 @@ class SinglyLinkedList:
 
     def push_front(self, key: Any):
         new_node = Node(key)
-        new_node.next = self.head
+        new_node.next_pointer = self.head
         self.head = new_node
 
         if not self.tail:

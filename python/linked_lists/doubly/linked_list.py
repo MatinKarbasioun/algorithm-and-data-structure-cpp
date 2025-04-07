@@ -24,7 +24,7 @@ class DoublyLinkedList:
 
     def push_front(self, key: Any):
         new_node = Node(key)
-        new_node.next = self.head
+        new_node.next_pointer = self.head
         self.head = new_node
 
         if not self.tail:
@@ -33,9 +33,8 @@ class DoublyLinkedList:
     def push_back(self, key: Any):
         new_node = Node(key)
 
-
         if self.head:
-            self.tail.next_pointer = new_node
+            new_node.previous_pointer = self.tail.previous_pointer
             new_node.next_pointer = self.tail.next_pointer
             self.tail = new_node
 
@@ -65,20 +64,16 @@ class DoublyLinkedList:
                self.tail = None
 
            else:
-               previous = self.tail.previous_pointer
-               previous.next_pointer = None
-               self.tail = previous
+               substitution_node = self.tail.previous_pointer
+               substitution_node.next_pointer = None
+               self.tail = substitution_node
 
-    def add_before(self, node: Node, key: Any):
-
-        if node == self.head:
-           self.push_front(key)
-
-        else:
-            new_node = Node(key)
-            new_node.previous_pointer = node.previous_pointer
-            new_node.next_pointer = node
-            node.previous_pointer = new_node
+    @classmethod
+    def add_before(cls, node: Node, key: Any):
+        new_node = Node(key)
+        new_node.previous_pointer = node.previous_pointer
+        new_node.next_pointer = node
+        node.previous_pointer = new_node
 
     @classmethod
     def add_after(cls, node: Node, key: Any):
