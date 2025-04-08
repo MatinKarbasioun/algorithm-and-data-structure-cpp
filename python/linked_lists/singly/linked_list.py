@@ -34,6 +34,7 @@ class SinglyLinkedList:
         new_node = Node(key)
 
         if self.head:
+            self.tail.next_pointer = new_node
             self.tail = new_node
 
         else:
@@ -50,10 +51,16 @@ class SinglyLinkedList:
 
     def pop_front(self):
         if self.__not_empty():
+            key = self.head.key
             self.head = self.head.next_pointer
 
             if not self.head:
                 self.tail = None
+
+            return key
+
+        else:
+            return None
 
     def pop_back(self):
         if self.__not_empty():
@@ -128,10 +135,10 @@ class SinglyLinkedList:
 
     def empty(self) -> bool:
         if self.head:
-            return True
+            return False
 
         else:
-            return False
+            return True
 
     def find(self, key: Any) -> bool:
         if self.__not_empty():

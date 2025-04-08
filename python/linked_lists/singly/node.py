@@ -34,3 +34,9 @@ class Node:
 
         else:
             return False
+
+    def __repr__(self) -> str:
+        return f"node with {self.key} and next pointer {self.next_pointer.key}"
+
+    def __str__(self) -> str:
+        return f"node with {self.key} and next pointer {self.next_pointer.key}"

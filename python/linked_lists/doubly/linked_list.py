@@ -36,6 +36,7 @@ class DoublyLinkedList:
         if self.head:
             new_node.previous_pointer = self.tail.previous_pointer
             new_node.next_pointer = self.tail.next_pointer
+            self.tail.next_pointer = new_node
             self.tail = new_node
 
         else:
@@ -52,21 +53,34 @@ class DoublyLinkedList:
 
     def pop_front(self):
         if self.__not_empty():
+            key = self.head.key
             self.head = self.head.next_pointer
 
             if not self.head:
                 self.tail = None
 
+            return key
+
+        else:
+            return None
+
     def pop_back(self):
         if self.__not_empty():
            if self.head == self.tail:
+               key = self.head.key
                self.head = None
                self.tail = None
 
            else:
+               key = self.tail.key
                substitution_node = self.tail.previous_pointer
                substitution_node.next_pointer = None
                self.tail = substitution_node
+
+           return key
+
+        else:
+            return None
 
     @classmethod
     def add_before(cls, node: Node, key: Any):
@@ -110,10 +124,10 @@ class DoublyLinkedList:
 
     def empty(self) -> bool:
         if self.head:
-            return True
+            return False
 
         else:
-            return False
+            return True
 
     def find(self, key: Any) -> bool:
         if self.__not_empty():
