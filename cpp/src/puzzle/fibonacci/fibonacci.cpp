@@ -1,7 +1,9 @@
-#include "puzzle/fibonacci/fibonacci_naive.h"
+#include "puzzle/fibonacci/fibonacci_fast.h"
 #include "puzzle/fibonacci/fibonacci.h"
 #include "common/decimal/decimal.h"
 #include "common/helper/elapse.h"
+#include <vector>
+#include <string>
 using namespace alg_time;
 
 
@@ -13,12 +15,16 @@ int input(){
 }
 
 void fibbo_func(){
-    FibonacciNaive<Decimal> fibonacci;
+    FibonacciFast<Decimal> fibonacci;
     int seriesNum = input();
     fibonacci.generate(seriesNum);
 }
 
-int fibonacci_main(){
+void fibonacci_main(){
+    auto fibonacci = std::vector<std::string>{"naive", "fast"};
+    auto i = 0;
+        int choice = 0;
+        std::cout << "Please Choose between projects" << std::endl;
     alg_time::elapse_time(fibbo_func);
-    return 0;
 }
+
