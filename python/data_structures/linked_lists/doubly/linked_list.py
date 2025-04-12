@@ -1,3 +1,4 @@
+from math import trunc
 from typing import Any, Iterator
 
 from .node import Node
@@ -55,6 +56,7 @@ class DoublyLinkedList:
             self.head = self.head.next_pointer
             if self.head:
                 self.head.previous_pointer = None
+
             else:
                 self.tail = None  # list is now empty
             self.__size -= 1
@@ -100,15 +102,18 @@ class DoublyLinkedList:
 
             if current.previous_pointer:
                 current.previous_pointer.next_pointer = current.next_pointer
+
             else:
                 self.head = current.next_pointer
 
             if current.next_pointer:
                 current.next_pointer.previous_pointer = current.previous_pointer
+
             else:
                 self.tail = current.previous_pointer
 
             self.__size -= 1
+            return current.key
 
     def clear(self):
         self.head = None
@@ -130,10 +135,13 @@ class DoublyLinkedList:
     def search(self, key: Any) -> Node:
         if self.__not_empty():
             current = self.head
+
             while current:
                 if current.key == key:
                     return current
+
                 current = current.next_pointer
+
             return None
 
     @property
@@ -152,6 +160,7 @@ class DoublyLinkedList:
     def __next__(self) -> Any:
         if not self.current:
             raise StopIteration
+
         key = self.current.key
         self.current = self.current.next_pointer
         return key

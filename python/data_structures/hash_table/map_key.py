@@ -7,6 +7,9 @@ class MapKey:
     key: Any
     value: Any
 
-    def __eq__(self, other):
-        if self.key == other.key:
+    def __eq__(self, key: str):
+        if self.key == key:
             return True
+
+        else:
+            return False

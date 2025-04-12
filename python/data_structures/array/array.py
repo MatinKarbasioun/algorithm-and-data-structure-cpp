@@ -77,6 +77,8 @@ class DynamicArray:
         return value
 
     def __check_index(self, index):
+        print('size of array', self.__size)
+        print('index', index)
         if index > self.__size or index < 0:
             raise IndexError
 
