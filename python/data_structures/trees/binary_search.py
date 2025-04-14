@@ -160,13 +160,23 @@ class BinarySearchTree:
     def __delete(self, node: BinaryTreeNode):
         if node.right:
             substitution = self.next(node)
-            substitution.parent.right = substitution.left
-            substitution.parent.right.left = substitution.left
+            substitution.parent.left = substitution.right
+            substitution.parent.left.parent = substitution.parent
+            self.__substitute(node, substitution)
 
         elif node.left:
-            pass
+            self.__substitute(node, node.left)
+
+    def __substitute(self, target_node: BinaryTreeNode, substitution_node: BinaryTreeNode):
+        if target_node.parent:
+            substitution_node.parent = target_node.parent
+
+            if target_node.parent.left == target_node:
+                target_node.parent.left = substitution_node
+
+
+            else:
+                target_node.parent.right = substitution_node
 
         else:
-            node.pare
-        def __promote(node)
-
+            self.root = substitution_node
