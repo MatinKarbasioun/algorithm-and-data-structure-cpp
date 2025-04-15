@@ -22,11 +22,12 @@ class BinarySearchTree:
         self.root: BinaryTreeNode | None = None
 
     def insert(self, key: Any):
+
         if self.root is None:
             self.root = BinaryTreeNode(key)
 
         else:
-            self.__insert(key, self.root)
+            self.__insert(key)
 
     def find(self, key: Any) -> BinaryTreeNode | None:
         return self.__find(self.root, key)
@@ -50,7 +51,7 @@ class BinarySearchTree:
         output = []
         node = self.find(start_key)
 
-        while node.key <= end_key:
+        while node and node.key <= end_key:
             if node.key >= start_key:
                 output.append(node)
 
@@ -58,8 +59,12 @@ class BinarySearchTree:
 
         return output
 
-    def delete(self, key: Any):
-        pass
+    def delete(self, node: BinaryTreeNode):
+        self.__delete(node)
+
+    def remove(self, key: Any):
+        node = self.find(key)
+        self.delete(node)
 
     @property
     def height(self) -> int:
@@ -77,21 +82,15 @@ class BinarySearchTree:
     def min(self):
         return self.__left_descendant(self.root)
 
-    def __insert(self, node: BinaryTreeNode, key: Any):
-        if key is None:
-            return
+    def __insert(self, key: Any):
 
-        if key > node.key:
-            self.__insert(node.right, key) if node.right else node.right = BinaryTreeNode(parent=node,
-                                                                                          key=key,
-                                                                                          level=node.level + 1)
+        nearest_node = self.find(key)
 
+        if nearest_node.key < key:
+            nearest_node.right = BinaryTreeNode(parent=nearest_node, key=key, level=nearest_node.level + 1)
 
-
-        elif key < node.key:
-            self.__insert(node.left, key) if node.left else node.left = BinaryTreeNode(parent=node,
-                                                                                       key=key,
-                                                                                       level=node.level + 1)
+        elif nearest_node.key > key:
+            nearest_node.left = BinaryTreeNode(parent=nearest_node, key=key, level=nearest_node.level + 1)
 
         else:
             return
