@@ -1,8 +1,7 @@
 from typing import Any
 
-from python.array.array import DynamicArray
-from python.hash_table.hash_func import HashFunction
-from python.linked_lists import DoublyLinkedList
+from python.data_structures.array.array import DynamicArray
+from python.data_structures.linked_lists import DoublyLinkedList
 
 """
 Real world use-cases

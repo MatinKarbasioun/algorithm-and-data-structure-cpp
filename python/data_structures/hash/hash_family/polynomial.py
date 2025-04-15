@@ -1,6 +1,7 @@
 from random import randint
 
-from python.data_structures.hash_table.helpers.miller_robin import MillerRobin
+from python.data_structures.hash.helpers.miller_robin import MillerRobin
+
 
 class PolynomialHashing:
     def __init__(self, max_value: int):
