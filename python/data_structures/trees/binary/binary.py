@@ -1,6 +1,6 @@
 from typing import Any
 
-from python.data_structures.trees.node import BinaryTreeNode
+from .node import BinaryTreeNode
 
 
 """
@@ -68,7 +68,7 @@ class BinarySearchTree:
 
     @property
     def height(self) -> int:
-        return self.__height(self.root)
+        return self.height_of_node(self.root)
 
     @property
     def size(self):
@@ -86,7 +86,7 @@ class BinarySearchTree:
 
         nearest_node = self.find(key)
 
-        if nearest_node.key < key:
+        if nearest_node.key <= key:
             nearest_node.right = BinaryTreeNode(parent=nearest_node, key=key, level=nearest_node.level + 1)
 
         elif nearest_node.key > key:
@@ -107,15 +107,15 @@ class BinarySearchTree:
 
         return node
 
-    def __height(self, node: BinaryTreeNode) -> int:
+    def height_of_node(self, node: BinaryTreeNode) -> int:
         left_height = 0
         right_height = 0
 
         if node.left:
-            left_height = self.__height(node.left)
+            left_height = self.height_of_node(node.left)
 
         if node.right:
-            right_height = self.__height(node.right)
+            right_height = self.height_of_node(node.right)
 
         return 1 + max(left_height, right_height)
 
